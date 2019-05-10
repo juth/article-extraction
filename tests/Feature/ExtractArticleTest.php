@@ -26,8 +26,7 @@ class ExtractArticleTest extends TestCase {
             ['url' => $url], ['Authorization' => ExtractArticleController::KEY]);
 
         $response->assertStatus(200);
-
-        //$response->assertJson(json_decode('{"yo": "baby"}', true));
+        $response->assertSeeText('good-paying job');
     }
 
     /**
@@ -41,5 +40,19 @@ class ExtractArticleTest extends TestCase {
             ['url' => $url], ['Authorization' => '1234567890']);
 
         $response->assertStatus(403);
+    }
+
+    /**
+     *  Tests extraction for a non-existant article
+     */
+    public function testExtractionFor404() {
+
+        $url = 'https://admissions.tufts.edu/blogs/post/tips-for-a-successful-summer-college-tour-trip/';
+
+        $response = $this->json('POST', '/api/article', 
+            ['url' => $url], ['Authorization' => ExtractArticleController::KEY]);
+
+        $response->assertStatus(200);
+        $response->assertSeeText('Not Found');        
     }
 }

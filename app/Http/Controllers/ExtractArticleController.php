@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Goose\Client as GooseClient;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
@@ -24,16 +25,27 @@ class ExtractArticleController extends Controller {
             throw new AuthorizationException('wrong key used');
         }
 
-        $result = [];
+        $result = (object) [
+            'title'       => '',
+            'description' => '',
+            'keywords'    => '',
+            'text'        => ''
+        ];
 
-        $goose   = new GooseClient();
-        $article = $goose->extractContent($request->input('url'));
+        try {
+            $goose   = new GooseClient();
+            $article = $goose->extractContent($request->input('url'));
 
-        $result['title']       = $article->getTitle();
-        $result['description'] = $article->getMetaDescription();
-        $result['keywords']    = $article->getMetaKeywords();
-        $result['text']        = $article->getCleanedArticleText();
+            $result->title       = $article->getTitle();
+            $result->description = $article->getMetaDescription();
+            $result->keywords    = $article->getMetaKeywords();
+            $result->text        = $article->getCleanedArticleText();
+        }
+        catch(ClientException $e) {
+            //  Swallow Guzzle exceptions, e.g., 404 errors
+            $result->text = 'Not Found';
+        }
 
-        return json_encode((object) $result);
+        return json_encode($result);
     }
 }
