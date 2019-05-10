@@ -21,7 +21,7 @@ class ExtractArticleController extends Controller {
         $key = $request->header('Authorization');
 
         if($key != static::KEY) {
-            throw new AuthorizationException('wrong key');
+            throw new AuthorizationException('wrong key used');
         }
 
         $result = [];
