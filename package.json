@@ -18,7 +18,7 @@
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.5",
+        "lodash": "^4.17.15",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
@@ -29,9 +29,9 @@
         "airtable": "^0.6.0",
         "article-parser": "^2.4.0",
         "fetch": "^1.1.0",
-        "follow-redirects": "^1.7.0",
+        "follow-redirects": "^1.8.1",
         "node-readability": "^3.0.0",
-        "npm": "^6.9.0",
+        "npm": "^6.11.2",
         "sentence-splitter": "^3.0.11",
         "unfluff": "^3.2.0"
     }
