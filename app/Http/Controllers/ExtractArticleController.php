@@ -40,6 +40,7 @@ class ExtractArticleController extends Controller {
             $result->description = $article->getMetaDescription();
             $result->keywords    = $article->getMetaKeywords();
             $result->text        = $article->getCleanedArticleText();
+            $result->image       = $article->getTopImage();
         }
         catch(ClientException $e) {
             //  Swallow Guzzle exceptions, e.g., 404 errors
