@@ -29,7 +29,7 @@
         "airtable": "^0.6.0",
         "article-parser": "^2.4.0",
         "fetch": "^1.1.0",
-        "follow-redirects": "^1.8.1",
+        "follow-redirects": "^1.14.7",
         "node-readability": "^3.0.0",
         "npm": "^6.11.2",
         "sentence-splitter": "^3.0.11",
